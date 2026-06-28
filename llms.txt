@@ -1,0 +1,16 @@
+# cardos (SDK)
+
+> Typed, dependency-free TypeScript SDK for the CardOS API (https://cardos.dev). Issue and manage virtual cards. Sandbox-first: cms_sk_test_… keys move no real money.
+
+## Install & use
+- `npm install cardos`
+- `import { CardOS } from 'cardos'; const cardos = new CardOS({ apiKey });`
+- Namespaces: products, balance, cards, deposits, statements, analytics, disputes, kyc, webhooks, sandbox.
+- Money ops (cards.issue, deposits.create) are idempotent.
+- Webhooks: verifyWebhookSignature(secret, header, rawBody).
+- Errors: CardOSError (status, code).
+
+## Links
+- Get a key: https://cardos.dev/partner/developers
+- Docs: https://cardos.dev/docs · Reference: https://cardos.dev/reference · OpenAPI: https://cardos.dev/openapi-v1.yaml
+- MCP server: https://github.com/CMSCardOS/cardos-mcp

@@ -1,0 +1,46 @@
+{
+  "name": "cardos",
+  "version": "0.1.0",
+  "description": "Typed TypeScript SDK for the CardOS API — issue and manage virtual cards. Sandbox-first, money-safe.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": ["dist", "openapi.yaml", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "node build.mjs && tsc -p tsconfig.json --emitDeclarationOnly",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "cardos",
+    "virtual-cards",
+    "card-issuing",
+    "cards-api",
+    "fintech",
+    "payments",
+    "sdk",
+    "typescript",
+    "api-client"
+  ],
+  "engines": { "node": ">=18" },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "repository": { "type": "git", "url": "git+https://github.com/CMSCardOS/cardos-sdk.git" },
+  "homepage": "https://cardos.dev",
+  "bugs": { "url": "https://github.com/CMSCardOS/cardos-sdk/issues" }
+}
