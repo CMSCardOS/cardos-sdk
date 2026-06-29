@@ -22,9 +22,9 @@ export class BalanceApi {
 
 export class Cards {
   constructor(private http: Http) {}
-  /** Issue a virtual card (idempotent). */
-  issue = (params: { externalUserRef: string; product?: string }) =>
-    this.http.request<Card>('POST', '/cards', { body: { external_user_ref: params.externalUserRef, ...(params.product ? { product: params.product } : {}) }, idempotent: true });
+  /** Issue a virtual card. Idempotent — pass a stable `idempotencyKey` to make caller-side retries safe. */
+  issue = (params: { externalUserRef: string; product?: string; idempotencyKey?: string }) =>
+    this.http.request<Card>('POST', '/cards', { body: { external_user_ref: params.externalUserRef, ...(params.product ? { product: params.product } : {}) }, idempotent: true, idempotencyKey: params.idempotencyKey });
   /** Masked card details. */
   get = (cardId: string) => this.http.request<Card>('GET', `/cards/${enc(cardId)}`);
   freeze = (cardId: string) => this.http.request<{ status: string }>('POST', `/cards/${enc(cardId)}/freeze`);
@@ -41,9 +41,9 @@ export class Cards {
 
 export class Deposits {
   constructor(private http: Http) {}
-  /** Create a crypto deposit invoice (idempotent). amount is a decimal string, e.g. "100". */
-  create = (params: { externalUserRef: string; amount: string; method?: DepositMethod }) =>
-    this.http.request<Deposit>('POST', '/deposits', { body: { external_user_ref: params.externalUserRef, amount: params.amount, method: params.method ?? 'usdt_trc20' }, idempotent: true });
+  /** Create a crypto deposit invoice. Idempotent — pass a stable `idempotencyKey` to make caller-side retries safe. amount is a decimal string, e.g. "100". */
+  create = (params: { externalUserRef: string; amount: string; method?: DepositMethod; idempotencyKey?: string }) =>
+    this.http.request<Deposit>('POST', '/deposits', { body: { external_user_ref: params.externalUserRef, amount: params.amount, method: params.method ?? 'usdt_trc20' }, idempotent: true, idempotencyKey: params.idempotencyKey });
   /** [sandbox] Confirm a pending deposit (test key only). */
   confirmSandbox = (depositId: string) => this.http.request<unknown>('POST', `/sandbox/deposits/${enc(depositId)}/confirm`);
 }

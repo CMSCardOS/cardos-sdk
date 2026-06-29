@@ -59,6 +59,7 @@ export interface Deposit {
   pay_amount_micro: string;
   currency: string;
   expires_at: string;
+  status: string;
   mode: Mode;
 }
 
@@ -111,4 +112,4 @@ export interface SpendControls {
 export type DepositMethod = 'usdt_trc20' | 'usdt_ton';
 export type DisputeReason = 'fraud' | 'not_received' | 'duplicate' | 'incorrect_amount' | 'other';
 export type DisputeStatus = 'open' | 'under_review' | 'resolved_won' | 'resolved_lost' | 'withdrawn';
-export type WebhookEvent = 'transaction' | 'balance' | 'issued' | 'card_status' | 'kyc';
+export type WebhookEvent = 'credited' | 'issued' | 'transaction' | 'card_status' | 'balance';

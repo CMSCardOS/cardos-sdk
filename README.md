@@ -121,7 +121,12 @@ new CardOS({
 });
 ```
 
-- **Idempotent money operations** — `cards.issue` and `deposits.create` send a fresh `Idempotency-Key`; retries never double-apply.
+- **Idempotent money operations** — `cards.issue` and `deposits.create` always carry an `Idempotency-Key`. For safety **across your own retries** (e.g. you retry after a timeout), pass a stable `idempotencyKey` and reuse the same value:
+  ```ts
+  const key = crypto.randomUUID();
+  await cardos.cards.issue({ externalUserRef: '123456', idempotencyKey: key }); // reuse `key` on retry
+  ```
+- **Retry safety** — only GET requests and requests with an `Idempotency-Key` are auto-retried on timeout/network; a keyless write is never replayed.
 - **Sandbox-first** — `cms_sk_test_…` keys move no real money.
 
 ## OpenAPI
