@@ -1,6 +1,6 @@
 # Security Policy
 
-Report vulnerabilities privately to **security@cardos.dev** (please don't open a public issue). We aim to acknowledge within 72 hours.
+Report vulnerabilities privately via GitHub: **Security → Report a vulnerability** in this repository (please don't open a public issue). We aim to acknowledge within 72 hours.
 
 ## Notes
 - The SDK is a thin client over the public CardOS REST API — no provider internals.
